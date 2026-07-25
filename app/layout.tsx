@@ -5,8 +5,6 @@ import "lenis/dist/lenis.css";
 import { ReactLenis } from "lenis/react";
 import { cn } from "@/lib/utils";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import FollowCursor from "@/components/global/FollowCursor";
-import SnowflakeCursor from "@/components/global/SnowflakeCursor";
 import LeafCursor from "@/components/global/LeafCursor";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });

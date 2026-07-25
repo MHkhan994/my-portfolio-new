@@ -136,7 +136,9 @@ export default function Home() {
         <div className="absolute -top-56 left-0 w-full h-56 bg-linear-to-b from-black/0 to-[#000e04]"></div>
         <div className="flex flex-col-reverse items-center md:flex-row gap-20 container mx-auto px-4 py-16">
           <div className="w-full space-y-6 flex-1">
-            <h1 className="text-3xl font-bold text-white">About Me</h1>
+            <h1 className="text-2xl md:text-3xl font-bold text-white">
+              About Me
+            </h1>
             <p className="text-[#c0c0c0]">
               I'm a full-stack developer who loves turning ideas into immersive
               digital experiences. I build modern web applications with Next.js,
@@ -150,7 +152,7 @@ export default function Home() {
               crafting experiences people remember.
             </p>
           </div>
-          <div className="max-h-[70%] max-w-2/5">
+          <div className="max-h-[70%] md:max-w-2/5">
             <Image
               src="/images/poster.png"
               width={1000}
@@ -161,7 +163,11 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* <section className="h-screen bg-[#000e04]"></section> */}
+      <section className="h-screen bg-[#000e04]">
+        <div className="container mx-auto px-4 py-16">
+          <h1 className="text-3xl font-bold text-white">Where I Work</h1>
+        </div>
+      </section>
     </main>
   );
 }

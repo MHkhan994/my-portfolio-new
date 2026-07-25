@@ -12,7 +12,7 @@ const LeafCursor: React.FC<LeafCursorOptions> = ({ element, zIndex }) => {
   const particles = useRef<any[]>([]);
   const canvImages = useRef<HTMLCanvasElement[]>([]);
   const animationFrame = useRef<number | null>(null);
-  const possibleEmoji = ["🍃", "🍂"]; // little leaves
+  const possibleEmoji = ["🌿", "📜", "🪶", "🍂"]; // little leaves
   const prefersReducedMotion = useRef<MediaQueryList | null>(null);
 
   useEffect(() => {
