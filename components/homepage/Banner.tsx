@@ -52,18 +52,27 @@ const Banner = () => {
       }}
     >
       <motion.div
+        className="origin-top"
         initial={{
           y: -600,
           opacity: 0,
+          rotate: 0,
         }}
         animate={{
           y: 0,
           opacity: 1,
+          rotate: [0, -0.6, 0.6, -0.6, 0.6, 0],
         }}
         transition={{
-          delay: 5,
-          duration: 1.2,
-          ease: [0.22, 1, 0.36, 1],
+          y: { delay: 5, duration: 1.2, ease: [0.22, 1, 0.36, 1] },
+          opacity: { delay: 5, duration: 1.2, ease: [0.22, 1, 0.36, 1] },
+          rotate: {
+            delay: 6.2,
+            duration: 6,
+            repeat: Infinity,
+            repeatType: "loop",
+            ease: "easeInOut",
+          },
         }}
       >
         <div className="relative z-10 w-fit flex items-center justify-center">

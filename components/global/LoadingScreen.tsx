@@ -40,7 +40,7 @@ export default function LoadingScreen() {
       >
         <motion.div
           style={{
-            transformOrigin: "50% 0%",
+            transformOrigin: "50% 50%",
           }}
           initial={{
             y: -600,
@@ -51,7 +51,7 @@ export default function LoadingScreen() {
             phase === "loading"
               ? {
                   y: 0,
-                  rotate: [5, -5, 4, -4, 3, -3, 2, -2, 0],
+                  rotate: [1.2, -1.2, 1, -1, 0.8, -0.8, 0.5, -0.5, 0],
                 }
               : {
                   y: -1200,
@@ -83,7 +83,7 @@ export default function LoadingScreen() {
           <img
             src="/images/wood-board.webp"
             alt="Loading Board"
-            className="select-none pointer-events-none w-[550px]"
+            className="block mx-auto select-none pointer-events-none w-[85vw] max-w-137.5"
             draggable={false}
           />
 

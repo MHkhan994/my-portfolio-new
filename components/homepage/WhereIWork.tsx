@@ -66,7 +66,7 @@ const jobs: Job[] = [
 
 const WhereIWork = () => {
   return (
-    <section className="bg-[#000e04] relative py-16 md:py-24">
+    <section className="bg-[#000e04] relative py-16 md:py-24 overflow-x-hidden">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-white font-permanent-marker mb-4">
           Where I Work

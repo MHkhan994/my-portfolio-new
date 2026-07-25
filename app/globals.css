@@ -94,6 +94,11 @@ body {
     auto;
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 /* For Chrome, Safari, Edge, Opera */
 html::-webkit-scrollbar {
   display: none;
