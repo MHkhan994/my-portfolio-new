@@ -64,10 +64,12 @@ export default function Home() {
             <div className="absolute w-full h-full flex flex-col  justify-center p-4 md:px-20 px-7">
               <div className="flex flex-col md:flex-row justify-between md:items-center gap-4 mb-4 text text-dark-gray mix-blend-multiply">
                 <div>
-                  <h3 className="text-lg md:text-xl font-semibold">
+                  <h3 className="text-xl md:text-2xl font-semibold">
                     Mahmudul Hasan Khan
                   </h3>
-                  <p>khanmahmud994@gmail.com</p>
+                  <p className="text-base md:text-lg font-medium">
+                    khanmahmud994@gmail.com
+                  </p>
                 </div>
                 <div className="flex items-center gap-5">
                   {socialLinks?.map((link) => (
@@ -98,7 +100,7 @@ export default function Home() {
                   "Hello, I'm A Software Developer",
                   5000,
                 ]}
-                className="text-xl sm:text-3xl md:text-4xl font-bold text-dark-gray mix-blend-multiply"
+                className="text-xl sm:text-3xl font-permanent-marker md:text-4xl font-bold text-dark-gray mix-blend-multiply"
                 wrapper="span"
                 speed={50}
                 preRenderFirstString
@@ -106,7 +108,7 @@ export default function Home() {
                 style={{ fontSize: "2em", display: "inline-block" }}
                 repeat={Infinity}
               />
-              <p className="text-xl text-dark-gray mix-blend-multiply mt-4">
+              <p className="text-xl md:text-2xl font-semibold text-dark-gray mix-blend-multiply mt-4">
                 I&apos;m a software developer specializing in building
                 exceptional digital experiences.
               </p>
@@ -135,8 +137,8 @@ export default function Home() {
       <section className="min-h-screen bg-[#000e04] relative">
         <div className="absolute -top-56 left-0 w-full h-56 bg-linear-to-b from-black/0 to-[#000e04]"></div>
         <div className="flex flex-col-reverse items-center md:flex-row gap-20 container mx-auto px-4 py-16">
-          <div className="w-full space-y-6 flex-1">
-            <h1 className="text-2xl md:text-3xl font-bold text-white">
+          <div className="w-full space-y-6 flex-1 text-xl">
+            <h1 className="text-2xl font-permanent-marker md:text-3xl font-bold text-white">
               About Me
             </h1>
             <p className="text-[#c0c0c0]">
@@ -165,7 +167,9 @@ export default function Home() {
       </section>
       <section className="h-screen bg-[#000e04]">
         <div className="container mx-auto px-4 py-16">
-          <h1 className="text-3xl font-bold text-white">Where I Work</h1>
+          <h1 className="text-3xl font-bold text-white font-permanent-marker">
+            Where I Work
+          </h1>
         </div>
       </section>
     </main>
