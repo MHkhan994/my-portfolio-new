@@ -1,15 +1,20 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Permanent_Marker, Geist } from "next/font/google";
 import "./globals.css";
+import "lenis/dist/lenis.css";
+import { ReactLenis } from "lenis/react";
+import { cn } from "@/lib/utils";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import FollowCursor from "@/components/global/FollowCursor";
+import SnowflakeCursor from "@/components/global/SnowflakeCursor";
+import LeafCursor from "@/components/global/LeafCursor";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const permanentMarker = Permanent_Marker({
+  variable: "--font-permanent-marker",
   subsets: ["latin"],
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -25,9 +30,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={cn(permanentMarker.variable, "font-sans", geist.variable)}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body>
+        <ReactLenis root />
+        <LeafCursor zIndex={10000} />
+        <TooltipProvider>{children}</TooltipProvider>
+      </body>
     </html>
   );
 }
