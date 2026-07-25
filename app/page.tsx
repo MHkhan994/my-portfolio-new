@@ -1,6 +1,9 @@
 "use client";
 
 import Banner from "@/components/homepage/Banner";
+import WhereIWork from "@/components/homepage/WhereIWork";
+import RecentProjects from "@/components/homepage/RecentProjects";
+import Contact from "@/components/homepage/Contact";
 import Image from "next/image";
 
 export default function Home() {
@@ -38,13 +41,9 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="h-screen bg-[#000e04]">
-        <div className="container mx-auto px-4 py-16">
-          <h1 className="text-3xl font-bold text-white font-permanent-marker">
-            Where I Work
-          </h1>
-        </div>
-      </section>
+      <WhereIWork />
+      <RecentProjects />
+      <Contact />
     </main>
   );
 }
