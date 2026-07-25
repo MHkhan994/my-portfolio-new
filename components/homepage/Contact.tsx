@@ -39,7 +39,7 @@ const socialLinks = [
 ];
 
 const inkFieldClasses =
-  "border-[#3b2a1a]/40 bg-[white]/60 text-[#3b2a1a] placeholder:text-[#3b2a1a]/50 focus-visible:border-[#3b2a1a] focus-visible:ring-[#3b2a1a]/30 rounded-md";
+  "border-[#3b2a1a]/40 h-10 bg-[white]/60 text-[#3b2a1a] placeholder:text-[#3b2a1a]/50 focus-visible:border-[#3b2a1a] focus-visible:ring-[#3b2a1a]/30 rounded-md";
 
 const Contact = () => {
   const [form, setForm] = useState({
@@ -107,41 +107,39 @@ const Contact = () => {
             className="w-full xs:hidden h-auto select-none pointer-events-none"
           />
 
-          <div className="absolute inset-0  p-8  flex flex-col justify-center text-dark-gray md:p-14 md:pt-20">
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div className="grid sm:grid-cols-2 gap-5 md:mt-20 mt-10">
-                <div className="space-y-1.5">
-                  <Label htmlFor="name" className="font-bold text-lg">
-                    Name
-                  </Label>
-                  <Input
-                    id="name"
-                    name="name"
-                    required
-                    value={form.name}
-                    onChange={handleChange}
-                    placeholder="Your name"
-                    className={inkFieldClasses}
-                  />
-                </div>
-                <div className="space-y-1.5">
-                  <Label htmlFor="email" className="font-bold text-lg">
-                    Email
-                  </Label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    required
-                    value={form.email}
-                    onChange={handleChange}
-                    placeholder="you@example.com"
-                    className={inkFieldClasses}
-                  />
-                </div>
+          <div className="absolute inset-0 p-10 flex flex-col justify-center text-dark-gray md:p-14 md:pt-20">
+            <form onSubmit={handleSubmit} className="space-y-5 sm:mt-10">
+              <div className="space-y-1.5">
+                <Label htmlFor="name" className="font-bold text-lg">
+                  Name
+                </Label>
+                <Input
+                  id="name"
+                  name="name"
+                  required
+                  value={form.name}
+                  onChange={handleChange}
+                  placeholder="Your name"
+                  className={inkFieldClasses}
+                />
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="email" className="font-bold text-lg">
+                  Email
+                </Label>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  value={form.email}
+                  onChange={handleChange}
+                  placeholder="you@example.com"
+                  className={inkFieldClasses}
+                />
               </div>
 
-              <div className="space-y-1.5">
+              {/* <div className="space-y-1.5">
                 <Label htmlFor="subject" className="font-bold text-lg">
                   Subject
                 </Label>
@@ -154,7 +152,7 @@ const Contact = () => {
                   placeholder="What's this about?"
                   className={inkFieldClasses}
                 />
-              </div>
+              </div> */}
 
               <div className="space-y-1.5">
                 <Label htmlFor="message" className="font-bold text-lg">

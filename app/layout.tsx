@@ -8,6 +8,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import LeafCursor from "@/components/global/LeafCursor";
 import LoadingReveal from "@/components/global/LoadingReveal";
 import LoadingScreen from "@/components/global/LoadingScreen";
+import ScrollIndicator from "@/components/global/ScrollIndicator";
+import ScrollProgressBar from "@/components/global/ScrollProgressBar";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -48,6 +50,8 @@ export default function RootLayout({
         <LeafCursor zIndex={10000} />
         <LoadingScreen />
         <LoadingReveal />
+        <ScrollIndicator />
+        <ScrollProgressBar />
         <TooltipProvider>{children}</TooltipProvider>
       </body>
     </html>
