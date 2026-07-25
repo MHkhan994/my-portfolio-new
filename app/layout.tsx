@@ -6,6 +6,8 @@ import { ReactLenis } from "lenis/react";
 import { cn } from "@/lib/utils";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import LeafCursor from "@/components/global/LeafCursor";
+import LoadingReveal from "@/components/global/LoadingReveal";
+import LoadingScreen from "@/components/global/LoadingScreen";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -44,6 +46,8 @@ export default function RootLayout({
       <body>
         <ReactLenis root />
         <LeafCursor zIndex={10000} />
+        <LoadingScreen />
+        <LoadingReveal />
         <TooltipProvider>{children}</TooltipProvider>
       </body>
     </html>
