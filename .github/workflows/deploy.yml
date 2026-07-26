@@ -12,18 +12,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: npm/action-setup@v4
-        with:
-          version: 10
-
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
 
-      - run: npm install --frozen-lockfile
+      - run: npm ci
 
-      - run: npm build
+      - run: npm run build
 
       - name: Copy standalone build to VPS
         uses: appleboy/scp-action@v0.1.7
