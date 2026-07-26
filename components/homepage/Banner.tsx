@@ -14,7 +14,7 @@ const Banner = () => {
     <section
       className="h-[calc(100dvh+200px)] pb-50 relative flex items-center justify-center"
       style={{
-        backgroundImage: "url('/images/background.png')",
+        backgroundImage: "url('/images/background.webp')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundAttachment: "fixed",
