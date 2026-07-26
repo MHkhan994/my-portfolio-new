@@ -1,0 +1,61 @@
+name: Deploy Portfolio
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm build
+
+      - name: Copy standalone build to VPS
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          port: ${{ secrets.VPS_PORT }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+
+          source: |
+            .next/standalone/*
+            .next/static
+            public
+
+          target: /var/www/portfolio
+
+          strip_components: 2
+
+      - name: Restart app
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          port: ${{ secrets.VPS_PORT }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+
+          script: |
+            mkdir -p /var/www/portfolio/.next
+
+            rm -rf /var/www/portfolio/.next/static
+            mv /var/www/portfolio/static /var/www/portfolio/.next/static
+
+            pm2 restart portfolio || pm2 start /var/www/portfolio/server.js --name portfolio
+
+            pm2 save
