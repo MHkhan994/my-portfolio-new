@@ -10,18 +10,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
 
-      - run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
-      - run: npm run build
+      - name: Build
+        run: npm run build
 
-      - name: Copy standalone build to VPS
+      - name: Verify standalone build
+        run: |
+          ls -la
+          ls -la .next
+          ls -la .next/standalone
+          ls -la .next/static
+
+      - name: Upload standalone build
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -29,16 +40,12 @@ jobs:
           port: ${{ secrets.VPS_PORT }}
           key: ${{ secrets.VPS_SSH_KEY }}
 
-          source: |
-            .next/standalone/*
-            .next/static
-            public
-
-          target: /var/www/portfolio
-
+          source: ".next/standalone/**,.next/static/**,public/**"
+          target: "/var/www/portfolio"
           strip_components: 2
+          overwrite: true
 
-      - name: Restart app
+      - name: Restart application
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -52,6 +59,10 @@ jobs:
             rm -rf /var/www/portfolio/.next/static
             mv /var/www/portfolio/static /var/www/portfolio/.next/static
 
-            pm2 restart portfolio || pm2 start /var/www/portfolio/server.js --name portfolio
+            if pm2 describe portfolio > /dev/null; then
+              pm2 restart portfolio
+            else
+              PORT=3003 pm2 start /var/www/portfolio/server.js --name portfolio
+            fi
 
             pm2 save
