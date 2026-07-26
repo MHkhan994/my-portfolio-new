@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "motion/react";
+import { useEffect, useRef, useState, FormEvent } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
-import { Send } from "lucide-react";
+import { CircleAlert, Feather, Loader2, Send } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
@@ -14,57 +14,79 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-
-const socialLinks = [
-  {
-    name: "GitHub",
-    url: "https://github.com/MHkhan994",
-    icon: "/logos/github-logo.png",
-  },
-  {
-    name: "LinkedIn",
-    url: "https://www.linkedin.com/in/mahmudul-hasan-khan-994/",
-    icon: "/logos/linkedin-logo.png",
-  },
-  {
-    name: "Resume",
-    url: "https://drive.google.com/file/d/1zwMh84tybVHh12QaJsU7zYnebZ5iiMR2/view?usp=sharing",
-    icon: "/logos/resume.png",
-  },
-  {
-    name: "Email",
-    url: "mailto:khanmahmud994@gmail.com",
-    icon: "/logos/mail.png",
-  },
-];
+import PigeonFly, { PigeonFlyHandle } from "../animations/PigeonFly";
+import { socialLinks } from "@/lib/uiData";
 
 const inkFieldClasses =
   "border-[#3b2a1a]/40 h-10 bg-[white]/60 text-[#3b2a1a] placeholder:text-[#3b2a1a]/50 focus-visible:border-[#3b2a1a] focus-visible:ring-[#3b2a1a]/30 rounded-md";
 
+const defaultFormData = {
+  name: "",
+  email: "",
+  message: "",
+};
+
+const SUCCESS_MESSAGE =
+  "Sent! Your message just took flight and is winging its way to my inbox — I'll write back soon.";
+
 const Contact = () => {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
+  const [form, setForm] = useState(defaultFormData);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const formRef = useRef<HTMLFormElement>(null);
+  const pigeonRef = useRef<PigeonFlyHandle>(null);
+
+  useEffect(() => {
+    if (status !== "success") return;
+    const timer = setTimeout(() => setStatus("idle"), 6000);
+    return () => clearTimeout(timer);
+  }, [status]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setStatus("idle");
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setSubmitError("");
+    setStatus("idle");
+    setSubmitting(true);
 
-    const body = `${form.message}\n\n— ${form.name} (${form.email})`;
-    const mailto = `mailto:khanmahmud994@gmail.com?subject=${encodeURIComponent(
-      form.subject || `Message from ${form.name}`,
-    )}&body=${encodeURIComponent(body)}`;
+    const { name, email, message } = form;
 
-    window.location.href = mailto;
-  };
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        throw new Error(data.message || "Failed to send message");
+      }
+
+      const rect = formRef.current?.getBoundingClientRect();
+      const startX = rect ? rect.left + rect.width / 2 : window.innerWidth / 2;
+      const startY = rect
+        ? rect.top + rect.height * (0.3 + Math.random() * 0.4)
+        : window.innerHeight / 2;
+      pigeonRef.current?.launchFrom(startX, startY);
+
+      setForm(defaultFormData);
+      setStatus("success");
+    } catch (err) {
+      setSubmitError(
+        err instanceof Error ? err.message : "Failed to send message",
+      );
+      setStatus("error");
+    } finally {
+      setSubmitting(false);
+    }
+  }
 
   return (
     <section className="bg-[#000e04] relative py-16 md:py-24">
@@ -139,21 +161,6 @@ const Contact = () => {
                 />
               </div>
 
-              {/* <div className="space-y-1.5">
-                <Label htmlFor="subject" className="font-bold text-lg">
-                  Subject
-                </Label>
-                <Input
-                  id="subject"
-                  name="subject"
-                  required
-                  value={form.subject}
-                  onChange={handleChange}
-                  placeholder="What's this about?"
-                  className={inkFieldClasses}
-                />
-              </div> */}
-
               <div className="space-y-1.5">
                 <Label htmlFor="message" className="font-bold text-lg">
                   Message
@@ -172,11 +179,55 @@ const Contact = () => {
 
               <Button
                 type="submit"
+                disabled={submitting}
                 className="w-full bg-dark-gray mix-blend-multiply text-white hover:bg-dark-gray/85 h-11"
               >
-                Send Message
-                <Send className="size-4" />
+                {submitting ? (
+                  <>
+                    Sending
+                    <Loader2 className="size-4 animate-spin" />
+                  </>
+                ) : (
+                  <>
+                    Send Message
+                    <Send className="size-4" />
+                  </>
+                )}
               </Button>
+
+              <AnimatePresence mode="wait">
+                {status === "success" && (
+                  <motion.div
+                    key="success"
+                    initial={{ opacity: 0, y: -6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                    className="flex items-center gap-2.5 rounded-md border border-[#3b2a1a]/25 bg-white/50 px-4 py-3 text-sm text-[#3b2a1a]"
+                  >
+                    <Feather className="size-4 shrink-0" />
+                    <span className="text-lg font-medium">
+                      {SUCCESS_MESSAGE}
+                    </span>
+                  </motion.div>
+                )}
+                {status === "error" && (
+                  <motion.div
+                    key="error"
+                    initial={{ opacity: 0, y: -6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                    className="flex items-center gap-2.5 rounded-md border border-red-800/25 bg-red-50/60 px-4 py-3 text-sm text-red-900"
+                  >
+                    <CircleAlert className="size-4 shrink-0" />
+                    <span>
+                      {submitError ||
+                        "That one got lost on the trail — mind trying again?"}
+                    </span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </form>
 
             <div className="flex items-center justify-center gap-5 mt-5">
@@ -201,6 +252,8 @@ const Contact = () => {
             </div>
           </div>
         </motion.div>
+
+        <PigeonFly ref={pigeonRef} />
 
         <p className="text-center text-[#c0c0c0]/60 text-sm mt-12 font-sans">
           &copy; {new Date().getFullYear()} Mahmudul Hasan Khan. Built with

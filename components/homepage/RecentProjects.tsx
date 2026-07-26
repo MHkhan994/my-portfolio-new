@@ -4,54 +4,7 @@ import { motion } from "motion/react";
 import { ExternalLink } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-
-type Project = {
-  title: string;
-  description: string;
-  stack: string[];
-  image: string;
-  liveUrl: string;
-  githubUrl: string;
-};
-
-const projects: Project[] = [
-  {
-    title: "DailyIT",
-    description:
-      "A full e-commerce platform for IT products, with product comparison, a PC builder, dynamic filtering, and a responsive storefront.",
-    stack: [
-      "Next.js",
-      "TypeScript",
-      "Node.js",
-      "MongoDB",
-      "Redux Toolkit",
-      "Redis",
-      "BullMQ",
-      "Tailwind CSS",
-    ],
-    image: "/project/dailyit.webp",
-    liveUrl: "https://itdaily.store",
-    githubUrl: "https://github.com/It-daily-store/it-daily-homepage",
-  },
-  {
-    title: "DailyIT Admin",
-    description:
-      "The admin panel behind DailyIT — role management, product/category/brand management, deals and sales management, and analytics dashboards for operational insight.",
-    stack: [
-      "Next.js",
-      "TypeScript",
-      "Node.js",
-      "MongoDB",
-      "Redux Toolkit",
-      "Redis",
-      "BullMQ",
-      "Tailwind CSS",
-    ],
-    image: "/project/dailyitAdmin.webp",
-    liveUrl: "https://admin.itdaily.store",
-    githubUrl: "https://github.com/It-daily-store/it-daily-admin",
-  },
-];
+import { projects } from "@/lib/uiData";
 
 const RecentProjects = () => {
   return (

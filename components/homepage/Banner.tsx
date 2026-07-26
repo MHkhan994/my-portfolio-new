@@ -7,38 +7,7 @@ import {
 import { motion } from "motion/react";
 import { TypeAnimation } from "react-type-animation";
 import Link from "next/link";
-
-const socialLinks = [
-  {
-    name: "GitHub",
-    url: "https://github.com/MHkhan994",
-    icon: "/logos/github-logo.png",
-  },
-  {
-    name: "LinkedIn",
-    url: "https://www.linkedin.com/in/mahmudul-hasan-khan-994/",
-    icon: "/logos/linkedin-logo.png",
-  },
-  // {
-  //   name: "Twitter",
-  //   url: "https://twitter.com/MHkhan994",
-  //   icon: "/logos/twitter-logo.png",
-  // },
-  {
-    name: "Resume",
-    url: "https://drive.google.com/file/d/1zwMh84tybVHh12QaJsU7zYnebZ5iiMR2/view?usp=sharing",
-    icon: "/logos/resume.png",
-    height: 32,
-    width: 32,
-  },
-  {
-    name: "Email",
-    url: "mailto:khanmahmud994@gmail.com",
-    icon: "/logos/mail.png",
-    height: 32,
-    width: 32,
-  },
-];
+import { socialLinks } from "@/lib/uiData";
 
 const Banner = () => {
   return (
