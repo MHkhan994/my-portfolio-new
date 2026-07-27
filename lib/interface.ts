@@ -21,5 +21,5 @@ export interface Project {
   stack: string[];
   image: string;
   liveUrl: string;
-  githubUrl: string;
+  githubUrl?: string;
 }

@@ -86,6 +86,30 @@ export const jobs: Job[] = [
 
 export const projects: Project[] = [
   {
+    title: "EasyDesk",
+    description:
+      "An AI-powered helpdesk platform for support teams. I build and maintain the embeddable live-chat widget and a reusable rich-text/HTML editor as internal npm packages powering its support-portal and ticketing experience.",
+    stack: ["Next.js", "TypeScript", "React", "GraphQL", "Node.js"],
+    image: "/project/easydesk.png",
+    liveUrl: "https://easydesk.app/",
+  },
+  {
+    title: "Payrun",
+    description:
+      "A web-based HR management platform covering attendance, leave, hiring, and payroll. I work on the employee-management and timesheet interfaces, built with Next.js and TypeScript on top of GraphQL APIs.",
+    stack: ["Next.js", "TypeScript", "React", "GraphQL", "Node.js"],
+    image: "/project/payrun.png",
+    liveUrl: "https://payrun.app/",
+  },
+  {
+    title: "Gain.io",
+    description:
+      "An all-in-one CRM for sales teams — contacts, pipelines, and deal tracking in one dashboard. I contribute type-safe, reusable UI components and GraphQL-driven data views across the product.",
+    stack: ["Next.js", "TypeScript", "React", "GraphQL", "Node.js"],
+    image: "/project/gain.png",
+    liveUrl: "https://gain.io/",
+  },
+  {
     title: "DailyIT",
     description:
       "A full e-commerce platform for IT products, with product comparison, a PC builder, dynamic filtering, and a responsive storefront.",

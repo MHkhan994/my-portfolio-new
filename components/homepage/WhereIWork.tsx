@@ -41,7 +41,7 @@ const WhereIWork = () => {
               const isEven = index % 2 === 0;
               return (
                 <div
-                  key={job.company}
+                  key={`${job.company}-${job.period}`}
                   className="relative flex items-start md:items-center gap-6 md:gap-0"
                 >
                   {/* marker */}

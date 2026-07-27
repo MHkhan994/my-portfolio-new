@@ -70,22 +70,24 @@ const RecentProjects = () => {
                   ))}
                 </div>
                 <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm font-semibold">
-                  <Link
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <div className="flex items-center text-lg gap-1.5 hover:underline">
-                      <Image
-                        src="/logos/github-logo.png"
-                        width={16}
-                        height={16}
-                        alt="GitHub"
-                        className="size-6"
-                      />
-                      Code
-                    </div>
-                  </Link>
+                  {project.githubUrl && (
+                    <Link
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <div className="flex items-center text-lg gap-1.5 hover:underline">
+                        <Image
+                          src="/logos/github-logo.png"
+                          width={16}
+                          height={16}
+                          alt="GitHub"
+                          className="size-6"
+                        />
+                        Code
+                      </div>
+                    </Link>
+                  )}
                   <Link
                     href={project.liveUrl}
                     target="_blank"
@@ -93,7 +95,7 @@ const RecentProjects = () => {
                   >
                     <div className="flex items-center gap-1.5 text-lg hover:underline">
                       <ExternalLink className="size-6" />
-                      Live Demo
+                      {project.githubUrl ? "Live Demo" : "Visit Site"}
                     </div>
                   </Link>
                 </div>
