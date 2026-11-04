@@ -8,7 +8,7 @@ export const socialLinks: SocialLink[] = [
   },
   {
     name: "LinkedIn",
-    url: "https://www.linkedin.com/in/mahmudul-hasan-khan-a61850263/",
+    url: "https://www.linkedin.com/in/mhkhan994/",
     icon: "/logos/linkedin-logo.png",
   },
   {
