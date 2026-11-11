@@ -22,4 +22,5 @@ export interface Project {
   image: string;
   liveUrl: string;
   githubUrl?: string;
+  client?: boolean;
 }

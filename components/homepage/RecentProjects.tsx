@@ -53,9 +53,16 @@ const RecentProjects = () => {
               </div>
 
               <div className="relative p-5 md:p-6 md:px-10 mix-blend-multiply">
-                <h3 className="text-xl md:text-2xl font-permanent-marker leading-snug mb-2">
-                  {project.title}
-                </h3>
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-2">
+                  <h3 className="text-xl md:text-2xl font-permanent-marker leading-snug">
+                    {project.title}
+                  </h3>
+                  {project.client && (
+                    <span className="text-xs font-sans font-semibold uppercase tracking-wide border border-dashed border-current rounded px-2 py-0.5">
+                      Client Project
+                    </span>
+                  )}
+                </div>
                 <p className="text-lg md:text-xl leading-snug mb-4">
                   {project.description}
                 </p>
