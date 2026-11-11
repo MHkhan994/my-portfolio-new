@@ -13,7 +13,7 @@ export const socialLinks: SocialLink[] = [
   },
   {
     name: "Resume",
-    url: "https://drive.google.com/file/d/1zwMh84tybVHh12QaJsU7zYnebZ5iiMR2/view?usp=sharing",
+    url: "https://drive.google.com/file/d/1CFVPaUlELujLfApTLOidWsj8tUhpGojv/view?usp=sharing",
     icon: "/logos/resume.png",
   },
   {
